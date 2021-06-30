@@ -7,7 +7,6 @@ import SignIn from "./SignIn";
 import "./app.css"
 
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useCollectionData } from "react-firebase-hooks/firestore";
 
 firebase.initializeApp({
   apiKey: "AIzaSyDuSaUqbtmqxLbgzyyEbxSatDn9VucvjM8",
