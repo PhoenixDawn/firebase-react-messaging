@@ -37,6 +37,7 @@ const ChatRoom = ({ auth, firestore, timeStamp }) => {
             <input type="text" value={formValue} onChange={(e) => setFormValue(e.target.value)} />
             <button type="submit">Send</button>
       </form>
+      <SignOut auth={auth}/>
     </>
   );
 };
