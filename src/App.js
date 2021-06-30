@@ -1,16 +1,39 @@
-import React from 'react';
+import React from "react";
+import firebase from "firebase";
+import "firebase/firestore";
+import "firebase/auth";
+import ChatRoom from "./ChatRoom";
+import SignIn from "./SignIn";
+import "./app.css"
+
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useCollectionData } from "react-firebase-hooks/firestore";
+
+firebase.initializeApp({
+  apiKey: "AIzaSyDuSaUqbtmqxLbgzyyEbxSatDn9VucvjM8",
+  authDomain: "react-messaging-66ae3.firebaseapp.com",
+  projectId: "react-messaging-66ae3",
+  storageBucket: "react-messaging-66ae3.appspot.com",
+  messagingSenderId: "510360445616",
+  appId: "1:510360445616:web:5d6ed32271b346d1cc9175",
+});
+
+const auth = firebase.auth();
+const firestore = firebase.firestore();
 
 function App() {
+  const [user] = useAuthState(auth);
+  
   return (
-    <div style={{ textAlign: 'center' }}>
-      <header>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
+    <div>
+      <header></header>
+      <main>
+        {user ? (
+          <ChatRoom auth={auth} timeStamp={firebase.firestore.FieldValue.serverTimestamp} firestore={firestore}/>
+        ) : (
+          <SignIn auth={auth} />
+        )}
+      </main>
     </div>
   );
 }
